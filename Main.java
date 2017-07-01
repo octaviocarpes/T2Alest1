@@ -46,7 +46,7 @@ public class Main {
         }
 
 
-        tree.pesquisa("bea");
+        tree.pesquisa("z");
 
         //tree.add(aux.get(0),aux.get(1));
 

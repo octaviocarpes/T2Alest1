@@ -103,19 +103,27 @@ public class TreeOfChar {
         searchNodes(root, palavra, tamPalavra);
         String res = palavra;
 
-        for (int i = 0; i < palavras.size() ; i++) {
+        for (int i = 0; i < palavras.size(); i++) {
             res = res + palavras.get(i);
-            System.out.println(res);
+        }
+
+        String[] words = res.split("\\.");
+
+        for (int i = 1; i < words.length; i++) {
+            words[i] = palavra + words[i];
+
         }
 
 
+        for (int i = 0; i < words.length; i++) {
+            System.out.println(words[i].replaceAll("(.)\\1{1,}", "$1"));
+        }
     }
 
 
     private void searchNodes(Node node, String palavra, int tamPalavra) {
 
         if (tamPalavra == palavra.length()) {
-            System.out.println("chamou montaPalavras! Nodo: " + node.element);
             montaPalavras(node, palavra);
         }
         if (tamPalavra < palavra.length()) {
@@ -138,36 +146,23 @@ public class TreeOfChar {
         }
     }
 
-    private void montaPalavras(Node node, String palavra){
-        if(node.isExternal()){
-            String s = ";";
+    private void montaPalavras(Node node, String palavra) {
+        if (node.isExternal()) {
+            String s = ": ";
             palavras.add(s);
             palavras.add(node.significado);
-            System.out.println(palavras);
             return;
         }
-        String s = "";
+        String s = "" + node.element;
 
         s = s + node.filhos.get(0).element;
 
-
         palavras.add(s);
 
-        for (int i = 0; i < node.filhos.size() ; i++) {
-            montaPalavras(node.filhos.get(i),palavra);
+        for (int i = 0; i < node.filhos.size(); i++) {
+            montaPalavras(node.filhos.get(i), palavra);
         }
     }
 
 
-//    public void print() {
-//        for (int i = 0; i < root.filhos.size() ; i++) {
-//            System.out.println(root.filhos.get(i).element);
-//        }
-//
-//        System.out.println("**********************");
-//
-//        for (int i = 0; i < root.filhos.get(0).filhos.size() ; i++) {
-//            System.out.println(root.filhos.get(0).filhos.get(i).element);
-//        }
-//    }
 }
