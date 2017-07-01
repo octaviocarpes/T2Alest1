@@ -1,7 +1,6 @@
 package com.T2Alest1;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class TreeOfChar {
 
@@ -43,12 +42,14 @@ public class TreeOfChar {
     private Node root;
     private int count;
     private ArrayList<String> palavras;
+    private ArrayList<String> significados;
 
     public TreeOfChar() {
         root = new Node('ˆ');
         root.father = null;
         count = 0;
-        palavras = new ArrayList<>();
+        palavras = new ArrayList<String>();
+        significados = new ArrayList<String>();
     }
 
     //Desempenho O(1) pois apenas chama o metodo addNode
@@ -99,26 +100,62 @@ public class TreeOfChar {
     public void pesquisa(String palavra) {
 
         int tamPalavra = 0;
-        searchNodes(root, palavra,tamPalavra);
+        searchNodes(root, palavra, tamPalavra);
+        String res = palavra;
+
+        for (int i = 0; i < palavras.size() ; i++) {
+            res = res + palavras.get(i);
+            System.out.println(res);
+        }
+
 
     }
 
 
     private void searchNodes(Node node, String palavra, int tamPalavra) {
 
-        if (tamPalavra == palavra.length()){
+        if (tamPalavra == palavra.length()) {
+            System.out.println("chamou montaPalavras! Nodo: " + node.element);
+            montaPalavras(node, palavra);
+        }
+        if (tamPalavra < palavra.length()) {
+            char primeiraLetra = palavra.charAt(tamPalavra);
+            System.out.println(primeiraLetra);
+            Node dummy = new Node(primeiraLetra);
+            tamPalavra++;
+            boolean verifica = false;
+
+            for (int i = 0; i < node.filhos.size(); i++) {
+                if (node.filhos.get(i).element == primeiraLetra) {
+                    verifica = true;
+                    dummy = node.filhos.get(i);
+                }
+            }
+
+            if (verifica) {
+                searchNodes(dummy, palavra, tamPalavra);
+            }
+        }
+    }
+
+    private void montaPalavras(Node node, String palavra){
+        if(node.isExternal()){
+            String s = ";";
+            palavras.add(s);
+            palavras.add(node.significado);
+            System.out.println(palavras);
             return;
         }
+        String s = "";
 
-        char c = palavra.charAt(tamPalavra);
-        tamPalavra++;
+        s = s + node.filhos.get(0).element;
 
-        boolean verifica = false;
+
+        palavras.add(s);
 
         for (int i = 0; i < node.filhos.size() ; i++) {
-            
+            montaPalavras(node.filhos.get(i),palavra);
         }
-
     }
 
 
