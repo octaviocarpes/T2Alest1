@@ -1,3 +1,4 @@
 # T2Alest1
-Este programa em java é apenas para foco acadêmico foi feito por um estudante de engenharia de software.
-A ideia principal é calcular a maior area retangular possivel sem a presenca de minas.
+## Trabalho final da disciplina de Algoritmos e Estrutura de Dados 1 - PUCRS
+
+Este trabalho tem como objetivo cirar uma árvore de caracteres e, com ela, fazer a pesquisa de uma lista de nomes com os seus significados. Por exemplo: ao digitar "gab" se obtem todos os nomes que começam com "gab" e seus significados.
